@@ -158,7 +158,11 @@ st.markdown(f"<style>{get_theme_css(st.session_state['theme'])}</style>", unsafe
 
 def get_clean_keyword(user_input, chat_history):
     load_dotenv()
-    llm = ChatOpenAI(model="gpt-4o", temperature=0)
+    llm = ChatOpenAI(
+    model="gpt-4o", 
+    temperature=0, 
+    openai_api_key=st.secrets["OPENAI_API_KEY"]
+)
     
     ABBREVIATIONS = """
     [약어 사전]
@@ -199,7 +203,11 @@ def get_agent_executor():
     today = datetime.now().strftime("%Y년 %m월 %d일")
     
     search_tool = TavilySearchResults(k=15)
-    llm = ChatOpenAI(model="gpt-4o", temperature=0)
+    llm = ChatOpenAI(
+    model="gpt-4o", 
+    temperature=0, 
+    openai_api_key=st.secrets["OPENAI_API_KEY"]
+)
     tools = [search_tool]
     
     prompt = ChatPromptTemplate.from_messages(
@@ -369,3 +377,4 @@ def main():
 if __name__ == "__main__":
 
     main()
+
