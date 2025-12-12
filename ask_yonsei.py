@@ -12,7 +12,11 @@ import base64
 import os
 
 st.set_page_config(page_title="물어보연세", page_icon="🦅", layout="wide")
-
+# [API 키 강제 주입 코드]
+if "OPENAI_API_KEY" in st.secrets:
+    os.environ["OPENAI_API_KEY"] = st.secrets["OPENAI_API_KEY"]
+if "TAVILY_API_KEY" in st.secrets:
+    os.environ["TAVILY_API_KEY"] = st.secrets["TAVILY_API_KEY"]
 # --------------------------------------------------------------------------
 # Theme Logic
 # --------------------------------------------------------------------------
@@ -363,4 +367,5 @@ def main():
                     st.write(e)
 
 if __name__ == "__main__":
+
     main()
